@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import { useState } from "react";
+
 // Base de datos simulada de las marcas. 
 // Guarda tus logos en la carpeta public/logos/ (ej: public/logos/toyota.png)
 const brands = [
@@ -21,6 +24,8 @@ const brands = [
 const duplicatedBrands = [...brands, ...brands];
 
 export function SparePartsBrandsSection() {
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+
   return (
     <section className="bg-black py-20 px-4 sm:px-6 overflow-hidden">
       
@@ -64,17 +69,23 @@ export function SparePartsBrandsSection() {
                 key={`${brand.name}-${idx}`} 
                 className="group flex h-[120px] w-[200px] shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#0a0a0a] shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#e60000]/50 hover:bg-[#121212] hover:shadow-[0_12px_30px_rgba(230,0,0,0.2)] cursor-pointer"
               >
-                <img 
-                  src={brand.logo} 
-                  alt={`Logo de repuestos ${brand.name}`} 
-                  className="h-16 w-32 object-contain opacity-40 grayscale transition-all duration-500 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                    // Si falla la imagen, buscamos el span hermano y lo mostramos
-                    (e.target as HTMLImageElement).nextElementSibling?.classList.remove('opacity-0');
-                  }}
-                />
-                <span className="absolute text-[15px] font-bold text-white/40 tracking-wider uppercase opacity-0 transition-opacity">
+                {failedImages[`${brand.name}-${idx}`] ? null : (
+                  <Image
+                    src={brand.logo}
+                    alt={`Logo de repuestos ${brand.name}`}
+                    width={128}
+                    height={64}
+                    className="h-16 w-32 object-contain opacity-40 grayscale transition-all duration-500 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0"
+                    onError={() => {
+                      setFailedImages((previous) => ({ ...previous, [`${brand.name}-${idx}`]: true }));
+                    }}
+                  />
+                )}
+                <span
+                  className={`absolute text-[15px] font-bold text-white/40 tracking-wider uppercase transition-opacity ${
+                    failedImages[`${brand.name}-${idx}`] ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   {brand.name}
                 </span>
               </div>

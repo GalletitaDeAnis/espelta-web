@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Clock3, Mail, MapPin, Phone, Facebook } from "lucide-react";
 
 const navPills = [
@@ -14,13 +16,15 @@ export function SiteFooterSection() {
     <footer className="border-t border-white/10 bg-black py-16 px-5 text-white/90 flex flex-col gap-12">
       <div className="mx-auto grid w-full max-w-[1400px] gap-12 md:grid-cols-[1.2fr_1.2fr_1fr]">
         <div className="flex flex-col items-start">
-          <a href="/" className="mb-6 block transition-transform duration-300 hover:scale-105">
-            <img
+          <Link href="/" className="mb-6 block transition-transform duration-300 hover:scale-105">
+            <Image
               src="/logoEspelta.png"
               alt="Logo Espelta Importaciones"
+              width={170}
+              height={70}
               className="h-[70px] w-auto object-contain drop-shadow-[0_2px_10px_rgba(255,255,255,0.1)]"
             />
-          </a>
+          </Link>
 
           <p className="max-w-[360px] text-[14px] leading-relaxed text-white/60">
             Nuestra misión es proveer a Bolivia de repuestos genuinos y alternativos
