@@ -1,12 +1,16 @@
-import { Car, Cog, Home, Search, Users } from "lucide-react";
+import { Search } from "lucide-react";
+import { FaCarSide, FaCog, FaGift, FaHome, FaUserCircle } from "react-icons/fa";
+import type { IconType } from "react-icons";
 
 const menuItems = [
-  { label: "INICIO", icon: Home },
-  { label: "SOBRE NOSOTROS", icon: Users },
-  { label: "PRODUCTOS", icon: Car },
-  { label: "REPUESTOS A PEDIDO", icon: Cog },
-  { label: "CLIENTE ESPELTA", icon: Users },
+  { label: "INICIO", icon: FaHome },
+  { label: "SOBRE NOSOTROS", icon: FaGift },
+  { label: "PRODUCTOS", icon: FaCarSide },
+  { label: "REPUESTOS A PEDIDO", icon: FaCog },
+  { label: "CLIENTE ESPELTA", icon: FaUserCircle },
 ];
+
+const activeLabel = "INICIO";
 
 export function GlobalHeader() {
   return (
@@ -21,20 +25,20 @@ export function GlobalHeader() {
         </a>
 
         <nav className="hidden items-center lg:flex">
-          {menuItems.map((item, index) => {
-            const Icon = item.icon;
-            const isFirst = index === 0;
+          {menuItems.map((item) => {
+            const Icon = item.icon as IconType;
+            const isActive = item.label === activeLabel;
 
             return (
               <a
                 key={item.label}
                 href="#"
-                className={`flex h-[58px] items-center gap-2 border-r border-white/30 px-3 text-[13px] font-bold ${
-                  isFirst ? "bg-white text-[#001d75]" : "text-white"
+                className={`flex h-[62px] min-w-[78px] flex-col items-center justify-center border-r border-white/30 px-3 text-center ${
+                  isActive ? "bg-[#dde2eb] text-[#001d75]" : "text-white"
                 }`}
               >
-                <Icon size={17} />
-                <span>{item.label}</span>
+                <Icon className={`mb-1 ${isActive ? "text-[#2447a8]" : "text-white"}`} size={18} />
+                <span className="text-[11px] font-semibold leading-none tracking-[-0.1px]">{item.label}</span>
               </a>
             );
           })}
