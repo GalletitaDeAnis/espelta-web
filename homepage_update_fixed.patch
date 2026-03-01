@@ -1,0 +1,64 @@
+diff -uNr homepage_update_orig/src/app/components/HomeBook.tsx homepage_update_mod/src/app/components/HomeBook.tsx
+--- homepage_update_orig/src/app/components/HomeBook.tsx	2025-12-17 20:31:10.309631080 +0000
++++ homepage_update_mod/src/app/components/HomeBook.tsx	2025-12-17 20:31:10.317631226 +0000
+@@ -7,22 +7,27 @@
+ /* ─────────────────────────────────────────────────────
+    Tokens (paleta equilibrada y sombras)
+    ──────────────────────────────────────────────────── */
++// Colores suavizados y sombras revisadas para un look más ligero y accesible
+ const TOKENS = {
+-  navy900: "#0b1625",
+-  navy800: "#12294a",
+-  navy600: "#415a77",
+-  gold: "#d4af37",
+-  paper: "#ffffff",
+-  gray950: "#0f172a",
+-  gray700: "#334155",
+-  gray600: "#475569",
+-  gray500: "#64748b",
+-  gray100: "#f7f8fb",
+-  gray150: "#eef1f6",
+-  gray200: "#e6e9ef",
+-  shadowCard: "0 8px 20px rgba(17,32,52,.08)",
+-  shadowCardHover: "0 10px 28px rgba(17,32,52,.12)",
+-  shadowHero: "0 10px 32px rgba(17,32,52,.18)",
++  // tonos azulados – ligeros navys para fondos y degradados
++  navy900: "#0f2040",    // fondo oscuro suavizado
++  navy800: "#19315e",    // tono para degradados en el héroe
++  navy600: "#48668e",    // tono medio en botones y acentos
++  // dorado más luminoso
++  gold:    "#d8b147",
++  // neutrales
++  paper:   "#ffffff",
++  gray950: "#1a293e",    // texto principal sobre blanco
++  gray700: "#3b4a60",
++  gray600: "#56657c",
++  gray500: "#6b7b8f",
++  gray100: "#f9fafc",
++  gray150: "#f1f4f8",
++  gray200: "#eaedf3",
++  // sombras ajustadas – más suaves
++  shadowCard:      "0 6px 16px rgba(17,32,52,.06)",
++  shadowCardHover: "0 8px 22px rgba(17,32,52,.12)",
++  shadowHero:      "0 12px 36px rgba(17,32,52,.18)",
+ };
+ 
+ export type Discipline = "Diseno" | "Motion" | "Filmmaker" | "Fotografia";
+@@ -39,12 +44,13 @@
+   return (
+     <button
+       onClick={onClick}
++      aria-pressed={active ? "true" : "false"}
+       className={[
+-        "px-4 py-2 rounded-full text-sm md:text-[15px] border transition",
++        "px-4 py-2 rounded-full text-sm md:text-[15px] border transition-transform duration-150",
+         active
+-          ? "bg-[#d4af37] text-[#111] border-[#caa42f] shadow-sm"
+-          : "bg-white text-[#0f172a] border-[#e6e9ef] hover:bg-[#f7f8fb]",
+-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-2",
++          ? "bg-[#d8b147] text-[#111] border-[#cfac46] shadow-sm"
++          : "bg-white text-[#1a293e] border-[#eaedf3] hover:bg-[#f9fafc]",
++        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d8b147] focus-visible:ring-offset-2",
+       ].join(" ")}
+     >
+       {children}
