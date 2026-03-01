@@ -5,7 +5,7 @@ import {
 
 export function HomeTopSection() {
   return (
-    <section className="relative min-h-[640px] overflow-hidden">
+    <section className="relative min-h-[780px] overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -30,8 +30,8 @@ export function HomeTopSection() {
         <ChevronRight size={36} strokeWidth={1.4} />
       </button>
 
-      <div className="relative z-10 mx-auto flex h-[610px] w-full max-w-[1380px] items-center px-6">
-        <div className="max-w-[600px] pt-4">
+      <div className="relative z-10 mx-auto flex h-[740px] w-full max-w-[1380px] items-center px-6">
+        <div className="max-w-[620px] pt-8">
           <h1 className="text-4xl font-extrabold uppercase leading-[1.14] tracking-tight text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)] md:text-5xl">
             Repuestos genuinos a pedido: la pieza exacta para tu vehículo
           </h1>

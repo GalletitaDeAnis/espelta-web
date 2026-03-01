@@ -8,7 +8,7 @@ const quickCards = [
 
 export function HomeCategoryBridge() {
   return (
-    <section className="relative z-30 -mt-[68px] mb-10">
+    <section className="relative z-30 -mt-[82px] mb-12">
       <div className="mx-auto flex w-full max-w-[1380px] justify-center px-6">
         <div className="flex gap-3">
           {quickCards.map((card) => {
