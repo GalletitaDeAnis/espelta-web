@@ -34,3 +34,7 @@ Sitio web base para Espelta, importadora de partes de autos.
 - `npm run start`: inicia el build de producción.
 - `npm run lint`: ejecuta ESLint.
 - `npm run typecheck`: valida tipos TypeScript.
+
+## Flujo Git recomendado
+
+- Ver guía completa de ramas y PRs: `docs/git-workflow.md`
