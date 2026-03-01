@@ -1,17 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import { FaHome, FaUsers, FaCarSide, FaUserCircle, FaWhatsapp } from "react-icons/fa";
 import type { IconType } from "react-icons";
 
 const menuItems = [
-  { label: "INICIO", icon: FaHome, isActive: true },
-  { label: "SOBRE NOSOTROS", icon: FaUsers },
-  { label: "PRODUCTOS", icon: FaCarSide },
-  { label: "CLIENTE ESPELTA", icon: FaUserCircle },
+  { label: "INICIO", icon: FaHome, href: "/" },
+  { label: "SOBRE NOSOTROS", icon: FaUsers, href: "/sobre-nosotros" },
+  { label: "PRODUCTOS", icon: FaCarSide, href: "#" },
+  { label: "CLIENTE ESPELTA", icon: FaUserCircle, href: "#" },
 ];
 
 export function GlobalHeader() {
+  const pathname = usePathname();
+
   return (
     // 1. Aumentamos la altura a h-[110px] y cambiamos el fondo a negro puro (bg-black)
     <header className="fixed inset-x-0 top-0 z-50 h-[110px] bg-black shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
@@ -33,25 +38,29 @@ export function GlobalHeader() {
         <nav className="hidden h-full lg:flex items-center shrink-0">
           {menuItems.map((item, index) => {
             const Icon = item.icon as IconType;
+            const isActive =
+              item.href !== "#" &&
+              (pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href)));
+
             return (
               <div key={item.label} className="flex h-full items-center">
-                <a
-                  href="#"
+                <Link
+                  href={item.href}
                   className={`group flex h-full flex-col items-center justify-center px-4 xl:px-6 transition-all duration-300 min-w-[110px] relative ${
-                    item.isActive
+                    isActive
                       ? "bg-white text-black" // Texto negro cuando está activo (sobre fondo blanco)
                       : "text-white hover:bg-white/10"
                   }`}
                 >
-                  {item.isActive && (
+                  {isActive && (
                     <div className="absolute top-0 inset-x-0 h-1.5 bg-[#e60000]" /> // Línea roja un poco más gruesa
                   )}
                   
-                  <Icon className={`mb-2 transition-transform duration-300 ${item.isActive ? "text-[28px] text-black" : "text-[26px] text-white/90 group-hover:scale-110 group-hover:text-white"}`} />
+                  <Icon className={`mb-2 transition-transform duration-300 ${isActive ? "text-[28px] text-black" : "text-[26px] text-white/90 group-hover:scale-110 group-hover:text-white"}`} />
                   <span className="text-[12px] xl:text-[13px] font-bold whitespace-nowrap tracking-wider uppercase">
                     {item.label}
                   </span>
-                </a>
+                </Link>
                 
                 {index < menuItems.length - 1 && (
                   <div className="h-[56px] w-[1px] bg-white/15 mx-1" /> // Separadores un poco más altos

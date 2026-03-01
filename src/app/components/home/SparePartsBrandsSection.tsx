@@ -1,155 +1,89 @@
-import { ArrowRight } from "lucide-react";
+"use client";
 
-// 1. Agregamos la propiedad 'brandLogo' a nuestra base de datos simulada.
-// Deja tus logos (ej: toyota.png) en la carpeta public/logos/
-const featuredParts = [
-  {
-    title: "FAROS LED DELANTEROS",
-    subtitle: "Entrega inmediata",
-    price: "Bs. 1.250,00",
-    image: "https://images.unsplash.com/photo-1550058145-a90a18711ce6?auto=format&fit=crop&w=600&q=80",
-    brandLogo: "/logos/toyota.png", // <- RUTA DE TU LOGO AQUÍ
-    specs: [
-      ["Marca", "Toyota"],
-      ["Modelo", "Hilux 2021-2023"],
-      ["Categoría", "Iluminación"],
-      ["Estado", "Nuevo - Original"],
-    ],
-  },
-  {
-    title: "AMORTIGUADORES TRASEROS",
-    subtitle: "A pedido (15 días)",
-    price: "Bs. 850,00",
-    image: "https://images.unsplash.com/photo-1620619878953-29a1a4de1e3f?auto=format&fit=crop&w=600&q=80",
-    brandLogo: "/logos/nissan.png", // <- RUTA DE TU LOGO AQUÍ
-    specs: [
-      ["Marca", "Nissan"],
-      ["Modelo", "Frontier NP300"],
-      ["Categoría", "Suspensión"],
-      ["Estado", "Nuevo - OEM"],
-    ],
-  },
-  {
-    title: "FILTRO DE AIRE ALTO FLUJO",
-    subtitle: "Entrega inmediata",
-    price: "Bs. 320,00",
-    image: "https://images.unsplash.com/photo-1600705722908-bab1e61c0b4d?auto=format&fit=crop&w=600&q=80",
-    brandLogo: "/logos/universal.png", // <- RUTA DE TU LOGO AQUÍ
-    specs: [
-      ["Marca", "Universal"],
-      ["Modelo", "Adaptable"],
-      ["Categoría", "Motor / Rendimiento"],
-      ["Estado", "Nuevo"],
-    ],
-  },
-  {
-    title: "KIT DE EMBRAGUE COMPLETO",
-    subtitle: "Pocas unidades",
-    price: "Bs. 2.100,00",
-    image: "https://images.unsplash.com/photo-1530906358829-e84b2769270f?auto=format&fit=crop&w=600&q=80",
-    brandLogo: "/logos/suzuki.png", // <- RUTA DE TU LOGO AQUÍ
-    specs: [
-      ["Marca", "Suzuki"],
-      ["Modelo", "Vitara / Grand Nomad"],
-      ["Categoría", "Transmisión"],
-      ["Estado", "Nuevo - Original"],
-    ],
-  },
+// Base de datos simulada de las marcas. 
+// Guarda tus logos en la carpeta public/logos/ (ej: public/logos/toyota.png)
+const brands = [
+  { name: "Toyota", logo: "/logos/toyota.png" },
+  { name: "Nissan", logo: "/logos/nissan.png" },
+  { name: "Suzuki", logo: "/logos/suzuki.png" },
+  { name: "Chevrolet", logo: "/logos/chevrolet.png" },
+  { name: "Hyundai", logo: "/logos/hyundai.png" },
+  { name: "Kia", logo: "/logos/kia.png" },
+  { name: "Honda", logo: "/logos/honda.png" },
+  { name: "Mazda", logo: "/logos/mazda.png" },
+  { name: "Ford", logo: "/logos/ford.png" },
+  { name: "Mitsubishi", logo: "/logos/mitsubishi.png" },
+  { name: "Jeep", logo: "/logos/jeep.png" },
+  { name: "Subaru", logo: "/logos/subaru.png" },
 ];
 
-export function FeaturedPartsSection() {
+// Duplicamos el array para crear la ilusión de un carrusel infinito sin cortes
+const duplicatedBrands = [...brands, ...brands];
+
+export function SparePartsBrandsSection() {
   return (
-    <section className="bg-black py-16 px-4 sm:px-6">
+    <section className="bg-black py-20 px-4 sm:px-6 overflow-hidden">
+      
+      {/* Inyectamos la animación CSS de forma segura.
+        Traslada el contenedor exactamente un 50% hacia la izquierda (la longitud del primer array original).
+      */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @keyframes infinite-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-infinite-scroll {
+          animation: infinite-scroll 40s linear infinite;
+        }
+      `}} />
+
       <div className="mx-auto w-full max-w-[1400px]">
         
         {/* ENCABEZADO */}
-        <div className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <h2 className="text-[28px] font-black uppercase tracking-tight text-white sm:text-[36px]">
-              REPUESTOS DESTACADOS
-            </h2>
-            <p className="mt-2 text-[15px] font-medium text-white/60">
-              Contamos con una gran variedad de piezas y repuestos para diferentes marcas. Calidad garantizada para la máxima exigencia.
-            </p>
-          </div>
-          <a
-            href="#"
-            className="group flex shrink-0 items-center gap-2 rounded-md bg-[#e60000] px-6 py-3.5 text-[15px] font-bold text-white transition-all duration-300 hover:bg-[#cc0000] hover:shadow-[0_4px_20px_rgba(230,0,0,0.4)] active:scale-95"
-          >
-            Ver todos los repuestos
-            <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
+        <div className="mb-14 flex flex-col items-center text-center">
+          <h2 className="text-[28px] font-black uppercase tracking-tight text-white sm:text-[36px]">
+            NUESTRAS MARCAS
+          </h2>
+          <div className="mt-3 h-1 w-20 bg-[#e60000] rounded-full" /> {/* Pequeño detalle visual de separación */}
+          <p className="mt-4 max-w-2xl text-[15px] font-medium text-white/60">
+            Trabajamos con repuestos originales y alternativos de alta gama para las marcas más reconocidas del mercado a nivel global.
+          </p>
         </div>
 
-        {/* GRILLA DE TARJETAS */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredParts.map((part) => (
-            <article 
-              key={part.title} 
-              className="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0d] shadow-lg transition-all duration-500 hover:-translate-y-2 hover:border-[#e60000]/60 hover:shadow-[0_15px_35px_rgba(230,0,0,0.2)]"
-            >
-              <div className="relative h-[220px] w-full overflow-hidden bg-[#1a1a1a]">
+        {/* CONTENEDOR DEL CARRUSEL */}
+        {/* La clase [mask-image:...] crea el efecto de desvanecimiento negro en los bordes izquierdo y derecho */}
+        <div className="relative w-full [mask-image:_linear-gradient(to_right,transparent_0,_black_100px,_black_calc(100%-100px),transparent_100%)] sm:[mask-image:_linear-gradient(to_right,transparent_0,_black_200px,_black_calc(100%-200px),transparent_100%)]">
+          
+          {/* TRACK DEL CARRUSEL: Tiene el hover:[animation-play-state:paused] para detenerse al pasar el cursor */}
+          <div className="flex w-max gap-5 animate-infinite-scroll hover:[animation-play-state:paused] py-4">
+            
+            {duplicatedBrands.map((brand, idx) => (
+              <div 
+                // Usamos el index porque tenemos elementos duplicados con el mismo nombre
+                key={`${brand.name}-${idx}`} 
+                className="group flex h-[120px] w-[200px] shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#0a0a0a] shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#e60000]/50 hover:bg-[#121212] hover:shadow-[0_12px_30px_rgba(230,0,0,0.2)] cursor-pointer"
+              >
                 <img 
-                  src={part.image} 
-                  alt={part.title} 
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  src={brand.logo} 
+                  alt={`Logo de repuestos ${brand.name}`} 
+                  className="h-16 w-32 object-contain opacity-40 grayscale transition-all duration-500 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                    // Si falla la imagen, buscamos el span hermano y lo mostramos
+                    (e.target as HTMLImageElement).nextElementSibling?.classList.remove('opacity-0');
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-300" />
-                
-                {/* ---------- NUEVO: INSIGNIA DE LA MARCA ---------- */}
-                {/* Se posiciona de forma absoluta en la esquina superior derecha */}
-                <div className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 p-2 shadow-lg backdrop-blur-md transition-transform duration-300 group-hover:scale-110">
-                  <img 
-                    src={part.brandLogo} 
-                    alt={`Logo de ${part.specs[0][1]}`} 
-                    className="h-full w-full object-contain opacity-90 transition-opacity duration-300 group-hover:opacity-100"
-                    // Si la imagen no carga, mostramos un fallback (útil mientras subes tus logos)
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
-                  {/* Pequeño tooltip nativo al pasar el mouse */}
-                  <span className="sr-only">Marca: {part.specs[0][1]}</span>
-                </div>
-                {/* ------------------------------------------------- */}
-                
-                {/* Etiqueta de Precio */}
-                <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                  <span className="rounded bg-[#e60000] px-2 py-1 text-[12px] font-bold text-white shadow-md">PRECIO</span>
-                  <p className="text-[22px] font-black text-white drop-shadow-md">{part.price}</p>
-                </div>
+                <span className="absolute text-[15px] font-bold text-white/40 tracking-wider uppercase opacity-0 transition-opacity">
+                  {brand.name}
+                </span>
               </div>
-
-              {/* Cuerpo de la Tarjeta */}
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="line-clamp-1 text-[17px] font-extrabold uppercase tracking-wide text-white">
-                  {part.title}
-                </h3>
-                <p className={`mt-1 text-[13px] font-semibold uppercase tracking-wider ${part.subtitle.includes("A pedido") ? "text-[#e60000]" : "text-[#25d366]"}`}>
-                  {part.subtitle}
-                </p>
-
-                {/* Tabla de Especificaciones */}
-                <div className="mt-5 flex-1 overflow-hidden rounded-lg border border-white/5 bg-[#141414]">
-                  {part.specs.map(([label, value], index) => (
-                    <div 
-                      key={`${part.title}-${label}`} 
-                      className={`flex justify-between px-3 py-2 text-[13px] ${index % 2 === 0 ? 'bg-white/[0.02]' : 'bg-transparent'}`}
-                    >
-                      <span className="font-medium text-white/50">{label}</span>
-                      <span className="font-bold text-white/90 text-right max-w-[60%] truncate" title={value}>{value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="absolute bottom-0 h-1 w-0 bg-[#e60000] transition-all duration-500 ease-out group-hover:w-full" />
-            </article>
-          ))}
+            ))}
+            
+          </div>
         </div>
+
       </div>
     </section>
   );
 }
-
-export const SparePartsBrandsSection = FeaturedPartsSection;
