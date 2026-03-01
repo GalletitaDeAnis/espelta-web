@@ -1,3 +1,7 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 // Datos de ejemplo adaptados a repuestos de vehículos
@@ -53,6 +57,8 @@ const featuredParts = [
 ];
 
 export function FeaturedCardsSection() {
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+
   return (
     // Contenedor principal oscuro
     <section className="bg-black py-16 px-4 sm:px-6">
@@ -86,10 +92,15 @@ export function FeaturedCardsSection() {
             >
               {/* Contenedor de Imagen con Efecto Hover */}
               <div className="relative h-[220px] w-full overflow-hidden">
-                <img 
-                  src={part.image} 
-                  alt={part.title} 
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                <Image
+                  src={failedImages[part.title] ? "/imagenHeader1.jpg" : part.image}
+                  alt={part.title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  onError={() => {
+                    setFailedImages((previous) => ({ ...previous, [part.title]: true }));
+                  }}
                 />
                 {/* Degradado para que el texto del precio siempre sea legible */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-300" />

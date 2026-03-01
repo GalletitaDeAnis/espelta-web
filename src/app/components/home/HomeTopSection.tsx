@@ -33,7 +33,7 @@ export function HomeTopSection() {
         <ChevronRight size={30} strokeWidth={1.8} />
       </button>
 
-      <div className="relative z-10 mx-auto flex h-[740px] w-full max-w-[1380px] items-center px-6">
+      <div className="relative z-10 mx-auto flex h-[740px] w-full max-w-[1380px] items-start px-6 pt-28 sm:pt-32 md:items-center md:pt-0">
         <div className="max-w-[650px]">
           <p className="mb-4 inline-flex rounded-full border border-white/30 bg-black/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/90">
             Importación y Repuestos
