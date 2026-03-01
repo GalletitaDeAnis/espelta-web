@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,18 +28,13 @@ export const metadata: Metadata = {
     title: "Espelta | Importadora de partes de autos",
     description: "Catálogo de repuestos, atención comercial y distribución confiable.",
     siteName: "Espelta",
-    images: [{
-      url: "/images/ramon-daza-hero.png",
-      width: 1200,
-      height: 630,
-      alt: "Espelta - Importadora de partes de autos",
-    }],
+    images: [{ url: "/next.svg" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Espelta | Importadora de partes de autos",
     description: "Catálogo de repuestos y atención para talleres y distribuidores.",
-    images: ["/images/ramon-daza-hero.png"],
+    images: ["/next.svg"],
   },
   robots: {
     index: true,
@@ -58,13 +52,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Script
-          id="adsense-init"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2637677821085391"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
         {children}
       </body>
     </html>
