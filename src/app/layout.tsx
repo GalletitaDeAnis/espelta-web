@@ -54,7 +54,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <GlobalHeader />
-        <div className="pt-[86px]">{children}</div>
+        <div className="pt-[112px]">{children}</div>
       </body>
     </html>
   );
