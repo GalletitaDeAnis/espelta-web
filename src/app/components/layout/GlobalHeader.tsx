@@ -18,18 +18,16 @@ export function GlobalHeader() {
   const pathname = usePathname();
 
   return (
-    // 1. Aumentamos la altura a h-[110px] y cambiamos el fondo a negro puro (bg-black)
-    <header className="fixed inset-x-0 top-0 z-50 h-[110px] bg-black shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-      <div className="mx-auto flex h-full w-full max-w-[1800px] items-center px-4 xl:px-8 gap-5 lg:gap-8">
+    <header className="fixed inset-x-0 top-0 z-50 h-[88px] bg-black shadow-[0_8px_30px_rgba(0,0,0,0.5)] sm:h-[96px] lg:h-[110px]">
+      <div className="mx-auto flex h-full w-full max-w-[1800px] items-center gap-3 px-3 sm:gap-4 sm:px-4 lg:gap-6 xl:px-8">
         
-        {/* 2. Logo - Aumentamos el max-w y reducimos un poco el padding vertical para que crezca */}
-        <Link href="/" className="shrink-0 transition-transform duration-300 hover:scale-105 flex items-center h-full py-1.5">
+        <Link href="/" className="flex h-full shrink-0 items-center py-1 transition-transform duration-300 hover:scale-105 sm:py-1.5">
           <Image
             src="/logoEspelta.png"
             alt="Logo Espelta"
             width={160}
             height={96}
-            className="h-full w-auto max-w-[160px] object-contain drop-shadow-[0_2px_8px_rgba(255,255,255,0.1)]"
+            className="h-full w-auto max-w-[130px] object-contain drop-shadow-[0_2px_8px_rgba(255,255,255,0.1)] sm:max-w-[145px] lg:max-w-[160px]"
             priority
           />
         </Link>
@@ -70,39 +68,37 @@ export function GlobalHeader() {
           })}
         </nav>
 
-        {/* Búsqueda - Ligeramente más alta para hacer match con el nuevo header */}
-        <div className="hidden md:block flex-1 min-w-[250px] max-w-[700px] mx-auto relative group">
+        <div className="group relative mx-auto hidden min-w-[240px] max-w-[520px] flex-1 xl:block">
           <input
             type="text"
             placeholder="Buscar repuestos, marcas..."
-            className="h-[52px] w-full rounded-[8px] bg-[#1a1a1a] border border-white/10 pl-5 pr-12 text-[15px] font-medium text-white outline-none placeholder:text-gray-400 shadow-inner transition-all duration-300 focus:bg-white focus:text-black focus:border-[#e60000] focus:ring-2 focus:ring-[#e60000]/60"
+            className="h-[48px] w-full rounded-[8px] border border-white/10 bg-[#1a1a1a] pl-5 pr-12 text-[14px] font-medium text-white shadow-inner outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#e60000] focus:bg-white focus:text-black focus:ring-2 focus:ring-[#e60000]/60"
           />
           <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-focus-within:text-[#e60000]" size={22} />
         </div>
 
-        {/* Sección Derecha: Contacto y Botón */}
-        <div className="flex shrink-0 items-center gap-5 xl:gap-8 ml-auto">
+        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3 lg:gap-4">
           
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <a 
               href="https://wa.me/59170706280" 
               target="_blank" 
               rel="noreferrer"
-              className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#25d366] shadow-[0_4px_12px_rgba(37,211,102,0.35)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_16px_rgba(37,211,102,0.5)]"
+              className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full bg-[#25d366] shadow-[0_4px_12px_rgba(37,211,102,0.35)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_16px_rgba(37,211,102,0.5)] sm:h-[44px] sm:w-[44px]"
             >
-              <FaWhatsapp className="text-white text-[32px]" />
+              <FaWhatsapp className="text-[22px] text-white sm:text-[25px]" />
             </a>
-            <div className="flex flex-col justify-center text-white whitespace-nowrap">
+            <div className="hidden whitespace-nowrap text-white xl:flex xl:flex-col xl:justify-center">
               <span className="text-[12px] text-white/70 font-medium leading-none mb-1.5 uppercase tracking-wide">¿Tienes alguna duda?</span>
-              <span className="text-[19px] font-black leading-tight tracking-wide drop-shadow-sm text-white">(+591) 70706280</span>
+              <span className="text-[15px] font-black leading-tight tracking-wide drop-shadow-sm text-white 2xl:text-[16px]">(+591) 70706280</span>
             </div>
           </div>
 
           <a
             href="#"
-            className="flex h-[52px] shrink-0 items-center justify-center whitespace-nowrap rounded-[6px] bg-[#e60000] px-7 xl:px-9 text-[16px] font-bold text-white shadow-[0_4px_12px_rgba(230,0,0,0.3)] transition-all duration-300 hover:bg-[#cc0000] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] active:scale-95 active:translate-y-0"
+            className="hidden h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-[6px] bg-[#e60000] px-4 text-[13px] font-bold text-white shadow-[0_4px_12px_rgba(230,0,0,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#cc0000] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] active:translate-y-0 active:scale-95 md:flex lg:h-[46px] lg:px-5 lg:text-[14px]"
           >
-            Contactar ahora
+            Contactar
           </a>
         </div>
       </div>
