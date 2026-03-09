@@ -23,13 +23,13 @@ const faqItems = [
 
 export function HomeFaqSection() {
   return (
-    <section className="bg-black px-4 py-16 sm:px-6">
+    <section className="bg-white px-4 py-16 sm:px-6">
       <div className="mx-auto w-full max-w-[980px]">
         <div className="mb-10 text-center">
-          <h2 className="text-[28px] font-black uppercase tracking-tight text-white sm:text-[36px]">
+          <h2 className="text-[28px] font-black uppercase tracking-tight text-slate-900 sm:text-[36px]">
             PREGUNTAS FRECUENTES
           </h2>
-          <p className="mt-2 text-[15px] font-medium text-white/60">
+          <p className="mt-2 text-[15px] font-medium text-slate-600">
             Resolvemos las dudas más comunes para que avances con tu compra sin fricciones.
           </p>
         </div>
@@ -38,13 +38,13 @@ export function HomeFaqSection() {
           {faqItems.map((item) => (
             <details
               key={item.question}
-              className="group rounded-xl border border-white/10 bg-[#0d0d0d] p-5 open:border-[#e60000]/60"
+              className="group rounded-xl border border-slate-200 bg-white p-5 open:border-primary/60"
             >
-              <summary className="cursor-pointer list-none pr-7 text-[15px] font-bold text-white marker:content-none">
+              <summary className="cursor-pointer list-none pr-7 text-[15px] font-bold text-slate-900 marker:content-none">
                 {item.question}
-                <span className="float-right text-[#e60000] transition-transform duration-300 group-open:rotate-45">+</span>
+                <span className="float-right text-primary transition-transform duration-300 group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-3 text-[14px] leading-relaxed text-white/70">{item.answer}</p>
+              <p className="mt-3 text-[14px] leading-relaxed text-slate-600">{item.answer}</p>
             </details>
           ))}
         </div>

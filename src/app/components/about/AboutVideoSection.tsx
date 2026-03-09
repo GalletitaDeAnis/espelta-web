@@ -36,24 +36,24 @@ export function AboutVideoSection() {
   const embedUrl = getYoutubeEmbedUrl(rawVideoUrl);
 
   return (
-    <section className="bg-black px-4 py-16 sm:px-6">
+    <section className="bg-white px-4 py-16 sm:px-6">
       <div className="mx-auto w-full max-w-[1200px]">
         <div className="mb-8 text-center">
-          <h2 className="text-[28px] font-black uppercase tracking-tight text-white sm:text-[36px]">
+          <h2 className="text-[28px] font-black uppercase tracking-tight text-slate-900 sm:text-[36px]">
             CONOCE ESPELTA EN VIDEO
           </h2>
-          <p className="mt-2 text-[15px] font-medium text-white/60">
+          <p className="mt-2 text-[15px] font-medium text-slate-600">
             {embedUrl
               ? "Mira cómo trabajamos: importación de repuestos, validación técnica y atención personalizada."
               : "Estamos preparando un video para mostrar nuestro proceso de importación y atención personalizada."}
           </p>
         </div>
 
-        <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0d] p-6 sm:p-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-[#e60000]/10" />
+        <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 sm:p-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-transparent to-primary/10" />
 
           {embedUrl ? (
-            <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black">
+            <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-white">
               <div className="relative w-full pt-[56.25%]">
                 <iframe
                   src={embedUrl}
@@ -66,17 +66,17 @@ export function AboutVideoSection() {
               </div>
             </div>
           ) : (
-            <div className="relative flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-white/20 bg-black/50 text-center">
-              <PlayCircle size={64} className="text-[#e60000]" strokeWidth={1.6} />
-              <p className="mt-5 text-[18px] font-extrabold uppercase tracking-wide text-white">Video próximamente</p>
-              <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-white/60">
+            <div className="relative flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-center">
+              <PlayCircle size={64} className="text-primary" strokeWidth={1.6} />
+              <p className="mt-5 text-[18px] font-extrabold uppercase tracking-wide text-slate-900">Video próximamente</p>
+              <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-slate-600">
                 Cuando tengas el enlace, agrega la variable NEXT_PUBLIC_HOME_VIDEO_URL y se mostrará aquí automáticamente.
               </p>
               <a
                 href="https://wa.me/59170706280"
                 target="_blank"
                 rel="noreferrer"
-                className="mt-6 inline-flex rounded-md bg-[#e60000] px-6 py-3 text-[14px] font-bold uppercase tracking-wide text-white transition-all duration-300 hover:bg-[#cc0000] hover:shadow-[0_6px_18px_rgba(230,0,0,0.35)]"
+                className="mt-6 inline-flex rounded-md bg-primary px-6 py-3 text-[14px] font-bold uppercase tracking-wide text-white transition-all duration-300 hover:bg-primary-strong hover:shadow-[0_6px_18px_rgba(30,64,175,0.35)]"
               >
                 Cotizar ahora
               </a>

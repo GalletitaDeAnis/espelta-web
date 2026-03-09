@@ -29,13 +29,13 @@ const benefits = [
 
 export function AboutWhyChooseUsSection() {
   return (
-    <section className="bg-black px-4 py-16 sm:px-6">
+    <section className="bg-white px-4 py-16 sm:px-6">
       <div className="mx-auto w-full max-w-[1400px]">
         <div className="mb-10 max-w-2xl">
-          <h2 className="text-[28px] font-black uppercase tracking-tight text-white sm:text-[36px]">
+          <h2 className="text-[28px] font-black uppercase tracking-tight text-slate-900 sm:text-[36px]">
             POR QUÉ ELEGIRNOS
           </h2>
-          <p className="mt-2 text-[15px] font-medium text-white/60">
+          <p className="mt-2 text-[15px] font-medium text-slate-600">
             Beneficios concretos para cotizar mejor, comprar con confianza y recibir justo el repuesto que necesitas.
           </p>
         </div>
@@ -47,15 +47,15 @@ export function AboutWhyChooseUsSection() {
             return (
               <article
                 key={benefit.title}
-                className="group rounded-xl border border-white/10 bg-[#0d0d0d] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#e60000]/60 hover:shadow-[0_14px_28px_rgba(230,0,0,0.18)]"
+                className="group rounded-xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60 hover:shadow-[0_14px_28px_rgba(30,64,175,0.15)]"
               >
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white/5 text-[#e60000]">
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-primary">
                   <Icon size={24} strokeWidth={1.9} />
                 </div>
-                <h3 className="text-[18px] font-extrabold uppercase tracking-wide text-white">
+                <h3 className="text-[18px] font-extrabold uppercase tracking-wide text-slate-900">
                   {benefit.title}
                 </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-white/65">{benefit.description}</p>
+                <p className="mt-2 text-[14px] leading-relaxed text-slate-600">{benefit.description}</p>
               </article>
             );
           })}

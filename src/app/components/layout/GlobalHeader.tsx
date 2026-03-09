@@ -18,7 +18,7 @@ export function GlobalHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-[88px] bg-black shadow-[0_8px_30px_rgba(0,0,0,0.5)] sm:h-[96px] lg:h-[110px]">
+    <header className="fixed inset-x-0 top-0 z-50 h-[88px] bg-header shadow-[0_8px_30px_rgba(30,64,175,0.45)] sm:h-[96px] lg:h-[110px]">
       <div className="mx-auto flex h-full w-full max-w-[1800px] items-center gap-3 px-3 sm:gap-4 sm:px-4 lg:gap-6 xl:px-8">
         
         <Link href="/" className="flex h-full shrink-0 items-center py-1 transition-transform duration-300 hover:scale-105 sm:py-1.5">
@@ -46,22 +46,22 @@ export function GlobalHeader() {
                   href={item.href}
                   className={`group flex h-full flex-col items-center justify-center px-4 xl:px-6 transition-all duration-300 min-w-[110px] relative ${
                     isActive
-                      ? "bg-white text-black" // Texto negro cuando está activo (sobre fondo blanco)
-                      : "text-white hover:bg-white/10"
+                      ? "bg-white text-blue-900"
+                      : "text-white hover:bg-white/15"
                   }`}
                 >
                   {isActive && (
-                    <div className="absolute top-0 inset-x-0 h-1.5 bg-[#e60000]" /> // Línea roja un poco más gruesa
+                    <div className="absolute top-0 inset-x-0 h-1.5 bg-primary" />
                   )}
                   
-                  <Icon className={`mb-2 transition-transform duration-300 ${isActive ? "text-[28px] text-black" : "text-[26px] text-white/90 group-hover:scale-110 group-hover:text-white"}`} />
+                  <Icon className={`mb-2 transition-transform duration-300 ${isActive ? "text-[28px] text-blue-900" : "text-[26px] text-white/90 group-hover:scale-110 group-hover:text-white"}`} />
                   <span className="text-[12px] xl:text-[13px] font-bold whitespace-nowrap tracking-wider uppercase">
                     {item.label}
                   </span>
                 </Link>
                 
                 {index < menuItems.length - 1 && (
-                  <div className="h-[56px] w-[1px] bg-white/15 mx-1" /> // Separadores un poco más altos
+                  <div className="h-[56px] w-[1px] bg-white/25 mx-1" />
                 )}
               </div>
             );
@@ -72,9 +72,9 @@ export function GlobalHeader() {
           <input
             type="text"
             placeholder="Buscar repuestos, marcas..."
-            className="h-[48px] w-full rounded-[8px] border border-white/10 bg-[#1a1a1a] pl-5 pr-12 text-[14px] font-medium text-white shadow-inner outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#e60000] focus:bg-white focus:text-black focus:ring-2 focus:ring-[#e60000]/60"
+            className="h-[48px] w-full rounded-[8px] border border-white/45 bg-white pl-5 pr-12 text-[14px] font-medium text-slate-800 shadow-inner outline-none transition-all duration-300 placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/35"
           />
-          <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-focus-within:text-[#e60000]" size={22} />
+          <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 transition-colors duration-300 group-focus-within:text-primary" size={22} />
         </div>
 
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3 lg:gap-4">
@@ -96,7 +96,7 @@ export function GlobalHeader() {
 
           <a
             href="#"
-            className="hidden h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-[6px] bg-[#e60000] px-4 text-[13px] font-bold text-white shadow-[0_4px_12px_rgba(230,0,0,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#cc0000] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] active:translate-y-0 active:scale-95 md:flex lg:h-[46px] lg:px-5 lg:text-[14px]"
+            className="hidden h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-[6px] bg-primary px-4 text-[13px] font-bold text-white shadow-[0_4px_12px_rgba(30,64,175,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-strong hover:shadow-[0_6px_16px_rgba(30,64,175,0.4)] active:translate-y-0 active:scale-95 md:flex lg:h-[46px] lg:px-5 lg:text-[14px]"
           >
             Contactar
           </a>

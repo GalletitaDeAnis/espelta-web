@@ -60,23 +60,22 @@ export function FeaturedCardsSection() {
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
   return (
-    // Contenedor principal oscuro
-    <section className="bg-black py-16 px-4 sm:px-6">
+    <section className="bg-white py-16 px-4 sm:px-6">
       <div className="mx-auto w-full max-w-[1400px]">
         
         {/* ENCABEZADO DE LA SECCIÓN (Basado en la imagen, pero modernizado) */}
         <div className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <h2 className="text-[28px] font-black uppercase tracking-tight text-white sm:text-[36px]">
+            <h2 className="text-[28px] font-black uppercase tracking-tight text-slate-900 sm:text-[36px]">
               REPUESTOS DESTACADOS
             </h2>
-            <p className="mt-2 text-[15px] font-medium text-white/60">
+            <p className="mt-2 text-[15px] font-medium text-slate-600">
               Contamos con una gran variedad de piezas y repuestos para diferentes marcas. Calidad garantizada para la máxima exigencia.
             </p>
           </div>
           <a
             href="#"
-            className="group flex shrink-0 items-center gap-2 rounded-md bg-[#e60000] px-6 py-3.5 text-[15px] font-bold text-white transition-all duration-300 hover:bg-[#cc0000] hover:shadow-[0_4px_20px_rgba(230,0,0,0.4)] active:scale-95"
+            className="group flex shrink-0 items-center gap-2 rounded-md bg-primary px-6 py-3.5 text-[15px] font-bold text-white transition-all duration-300 hover:bg-primary-strong hover:shadow-[0_4px_20px_rgba(30,64,175,0.35)] active:scale-95"
           >
             Ver todos los repuestos
             <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -88,7 +87,7 @@ export function FeaturedCardsSection() {
           {featuredParts.map((part) => (
             <article 
               key={part.title} 
-              className="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0d] shadow-lg transition-all duration-500 hover:-translate-y-2 hover:border-[#e60000]/60 hover:shadow-[0_15px_35px_rgba(230,0,0,0.2)]"
+              className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md transition-all duration-500 hover:-translate-y-2 hover:border-primary/45 hover:shadow-[0_15px_35px_rgba(30,64,175,0.15)]"
             >
               {/* Contenedor de Imagen con Efecto Hover */}
               <div className="relative h-[220px] w-full overflow-hidden">
@@ -102,43 +101,39 @@ export function FeaturedCardsSection() {
                     setFailedImages((previous) => ({ ...previous, [part.title]: true }));
                   }}
                 />
-                {/* Degradado para que el texto del precio siempre sea legible */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-300" />
                 
                 {/* Etiqueta de Precio integrada en la imagen */}
                 <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                  <span className="rounded bg-[#e60000] px-2 py-1 text-[12px] font-bold text-white shadow-md">PRECIO</span>
+                  <span className="rounded bg-primary px-2 py-1 text-[12px] font-bold text-white shadow-md">PRECIO</span>
                   <p className="text-[22px] font-black text-white drop-shadow-md">{part.price}</p>
                 </div>
               </div>
 
               {/* Cuerpo de la Tarjeta */}
               <div className="flex flex-1 flex-col p-5">
-                <h3 className="line-clamp-1 text-[17px] font-extrabold uppercase tracking-wide text-white">
+                <h3 className="line-clamp-1 text-[17px] font-extrabold uppercase tracking-wide text-slate-900">
                   {part.title}
                 </h3>
-                {/* Subtítulo dinámico (rojo o verde según stock) */}
-                <p className={`mt-1 text-[13px] font-semibold uppercase tracking-wider ${part.subtitle.includes("A pedido") ? "text-[#e60000]" : "text-[#25d366]"}`}>
+                <p className={`mt-1 text-[13px] font-semibold uppercase tracking-wider ${part.subtitle.includes("A pedido") ? "text-primary" : "text-[#25d366]"}`}>
                   {part.subtitle}
                 </p>
 
-                {/* Tabla de Especificaciones - Estilo Neumorfismo Dark */}
-                <div className="mt-5 flex-1 overflow-hidden rounded-lg border border-white/5 bg-[#141414]">
+                <div className="mt-5 flex-1 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
                   {part.specs.map(([label, value], index) => (
                     <div 
                       key={`${part.title}-${label}`} 
-                      // Alternamos colores sutiles en las filas (zebra striping) para mayor legibilidad
-                      className={`flex justify-between px-3 py-2 text-[13px] ${index % 2 === 0 ? 'bg-white/[0.02]' : 'bg-transparent'}`}
+                      className={`flex justify-between px-3 py-2 text-[13px] ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}
                     >
-                      <span className="font-medium text-white/50">{label}</span>
-                      <span className="font-bold text-white/90 text-right max-w-[60%] truncate" title={value}>{value}</span>
+                      <span className="font-medium text-slate-500">{label}</span>
+                      <span className="font-bold text-slate-700 text-right max-w-[60%] truncate" title={value}>{value}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Línea roja inferior de adorno en hover */}
-              <div className="absolute bottom-0 h-1 w-0 bg-[#e60000] transition-all duration-500 ease-out group-hover:w-full" />
+              <div className="absolute bottom-0 h-1 w-0 bg-primary transition-all duration-500 ease-out group-hover:w-full" />
             </article>
           ))}
         </div>

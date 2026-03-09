@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Base de datos simulada de las marcas. 
 // Guarda tus logos en la carpeta public/logos/ (ej: public/logos/toyota.png)
@@ -25,9 +25,106 @@ const duplicatedBrands = [...brands, ...brands];
 
 export function SparePartsBrandsSection() {
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+  const carouselContainerRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  useEffect(() => {
+    const container = carouselContainerRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    let animationFrameId = 0;
+    let latestContainerRect = container.getBoundingClientRect();
+    let isVisible = true;
+
+    const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
+    const smoothstep = (value: number) => {
+      const t = clamp01(value);
+      return t * t * (3 - 2 * t);
+    };
+
+    const recalculateContainerRect = () => {
+      latestContainerRect = container.getBoundingClientRect();
+    };
+
+    const updateCardsOpacity = () => {
+      const containerRect = latestContainerRect;
+      const fadeZone = Math.min(240, containerRect.width * 0.27);
+      const visualBleed = 14;
+      const safetyInset = 10;
+
+      cardRefs.current.forEach((card) => {
+        if (!card) {
+          return;
+        }
+
+        const cardRect = card.getBoundingClientRect();
+        const visualLeft = cardRect.left - visualBleed;
+        const visualRight = cardRect.right + visualBleed;
+
+        const leftDistance = visualRight - (containerRect.left + safetyInset);
+        const rightDistance = (containerRect.right - safetyInset) - visualLeft;
+
+        const leftOpacity = smoothstep(leftDistance / fadeZone);
+        const rightOpacity = smoothstep(rightDistance / fadeZone);
+        const opacity = clamp01(Math.min(leftOpacity, rightOpacity));
+        const finalOpacity = opacity < 0.02 ? 0 : opacity;
+
+        card.style.opacity = finalOpacity.toFixed(3);
+      });
+    };
+
+    const loop = () => {
+      if (!isVisible) {
+        animationFrameId = 0;
+        return;
+      }
+
+      updateCardsOpacity();
+      animationFrameId = requestAnimationFrame(loop);
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      recalculateContainerRect();
+      updateCardsOpacity();
+    });
+
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+
+        if (isVisible && animationFrameId === 0) {
+          recalculateContainerRect();
+          animationFrameId = requestAnimationFrame(loop);
+        }
+
+        if (!isVisible && animationFrameId !== 0) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = 0;
+        }
+      },
+      { threshold: 0.01 }
+    );
+
+    resizeObserver.observe(container);
+    intersectionObserver.observe(container);
+    recalculateContainerRect();
+    animationFrameId = requestAnimationFrame(loop);
+
+    return () => {
+      if (animationFrameId !== 0) {
+        cancelAnimationFrame(animationFrameId);
+      }
+
+      resizeObserver.disconnect();
+      intersectionObserver.disconnect();
+    };
+  }, []);
 
   return (
-    <section className="bg-black py-20 px-4 sm:px-6 overflow-hidden">
+    <section className="bg-white py-20 px-4 sm:px-6 overflow-hidden">
       
       {/* Inyectamos la animación CSS de forma segura.
         Traslada el contenedor exactamente un 50% hacia la izquierda (la longitud del primer array original).
@@ -47,42 +144,46 @@ export function SparePartsBrandsSection() {
         
         {/* ENCABEZADO */}
         <div className="mb-14 flex flex-col items-center text-center">
-          <h2 className="text-[28px] font-black uppercase tracking-tight text-white sm:text-[36px]">
+          <h2 className="text-[28px] font-black uppercase tracking-tight text-slate-900 sm:text-[36px]">
             NUESTRAS MARCAS
           </h2>
-          <div className="mt-3 h-1 w-20 bg-[#e60000] rounded-full" /> {/* Pequeño detalle visual de separación */}
-          <p className="mt-4 max-w-2xl text-[15px] font-medium text-white/60">
-            Trabajamos con repuestos originales y alternativos de alta gama para las marcas más reconocidas del mercado a nivel global.
+          <div className="mt-3 h-1 w-20 bg-primary rounded-full" />
+          <p className="mt-4 max-w-2xl text-[15px] font-medium text-slate-600">
+            Trabajamos con repuestos genuinos y alternativos de alta gama para las marcas más reconocidas del mercado a nivel global.
           </p>
         </div>
 
         {/* CONTENEDOR DEL CARRUSEL */}
-        {/* La clase [mask-image:...] crea el efecto de desvanecimiento negro en los bordes izquierdo y derecho */}
-        <div className="relative w-full [mask-image:_linear-gradient(to_right,transparent_0,_black_100px,_black_calc(100%-100px),transparent_100%)] sm:[mask-image:_linear-gradient(to_right,transparent_0,_black_200px,_black_calc(100%-200px),transparent_100%)]">
+        <div ref={carouselContainerRef} className="relative w-full overflow-hidden">
           
           {/* TRACK DEL CARRUSEL: Tiene el hover:[animation-play-state:paused] para detenerse al pasar el cursor */}
-          <div className="flex w-max gap-5 animate-infinite-scroll hover:[animation-play-state:paused] py-4">
+          <div className="relative z-10 flex w-max gap-5 animate-infinite-scroll hover:[animation-play-state:paused] py-4">
             
             {duplicatedBrands.map((brand, idx) => (
               <div 
                 // Usamos el index porque tenemos elementos duplicados con el mismo nombre
                 key={`${brand.name}-${idx}`} 
-                className="group flex h-[120px] w-[200px] shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#0a0a0a] shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#e60000]/50 hover:bg-[#121212] hover:shadow-[0_12px_30px_rgba(230,0,0,0.2)] cursor-pointer"
+                ref={(element) => {
+                  cardRefs.current[idx] = element;
+                }}
+                className="group relative flex h-[120px] w-[200px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-600 bg-gradient-to-b from-slate-700 to-slate-800 shadow-md transition-all duration-300 [will-change:opacity,transform] hover:-translate-y-2 hover:border-primary/55 hover:shadow-[0_12px_30px_rgba(30,64,175,0.2)] cursor-pointer"
               >
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/12 via-transparent to-black/20 opacity-70" />
+
                 {failedImages[`${brand.name}-${idx}`] ? null : (
                   <Image
                     src={brand.logo}
                     alt={`Logo de repuestos ${brand.name}`}
                     width={128}
                     height={64}
-                    className="h-16 w-32 object-contain opacity-40 grayscale transition-all duration-500 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0"
+                    className="relative z-10 mx-auto h-16 w-32 object-contain opacity-90 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
                     onError={() => {
                       setFailedImages((previous) => ({ ...previous, [`${brand.name}-${idx}`]: true }));
                     }}
                   />
                 )}
                 <span
-                  className={`absolute text-[15px] font-bold text-white/40 tracking-wider uppercase transition-opacity ${
+                  className={`absolute inset-0 z-10 flex items-center justify-center text-[15px] font-bold text-white/80 tracking-wider uppercase transition-opacity ${
                     failedImages[`${brand.name}-${idx}`] ? "opacity-100" : "opacity-0"
                   }`}
                 >
@@ -92,6 +193,7 @@ export function SparePartsBrandsSection() {
             ))}
             
           </div>
+
         </div>
 
       </div>

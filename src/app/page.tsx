@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col">
+    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
       <HomeTopSection />
       <HomeCategoryBridge />
       <FeaturedCardsSection />
