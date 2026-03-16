@@ -1,19 +1,45 @@
-import {
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TypewriterWord } from "./TypewriterWord";
 
 export function HomeTopSection() {
+  const images = ["/imagenHeader1.jpg", "/imagenHeader2.jpg"];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
   return (
     <section className="relative overflow-hidden h-[calc(100svh-88px-108px)] min-h-[470px] sm:h-[calc(100svh-96px-114px)] sm:min-h-[510px] lg:h-[calc(100svh-110px-128px)] lg:min-h-[560px]">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('/imagenHeader1.jpg')",
-        }}
-      />
+      <div className="absolute inset-0">
+        {images.map((src, index) => (
+          <div
+            key={src}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-out ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+            style={{
+              backgroundImage: `url('${src}')`,
+            }}
+            aria-hidden={index !== currentIndex}
+          />
+        ))}
+      </div>
 
       <div className="absolute inset-0 bg-gradient-to-r from-white/38 via-white/10 via-32% to-transparent to-50%" />
 
@@ -21,6 +47,7 @@ export function HomeTopSection() {
         type="button"
         aria-label="Slide anterior"
         className="absolute left-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-slate-300 bg-white/80 text-slate-700 backdrop-blur-sm transition hover:bg-white hover:text-slate-900 sm:flex lg:left-4 lg:h-12 lg:w-12"
+        onClick={handlePrev}
       >
         <ChevronLeft size={30} strokeWidth={1.8} />
       </button>
@@ -29,6 +56,7 @@ export function HomeTopSection() {
         type="button"
         aria-label="Siguiente slide"
         className="absolute right-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-slate-300 bg-white/80 text-slate-700 backdrop-blur-sm transition hover:bg-white hover:text-slate-900 sm:flex lg:right-4 lg:h-12 lg:w-12"
+        onClick={handleNext}
       >
         <ChevronRight size={30} strokeWidth={1.8} />
       </button>
