@@ -166,24 +166,22 @@ export function SparePartsBrandsSection() {
                 ref={(element) => {
                   cardRefs.current[idx] = element;
                 }}
-                className="group relative flex h-[120px] w-[200px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-600 bg-gradient-to-b from-slate-700 to-slate-800 shadow-md transition-all duration-300 [will-change:opacity,transform] hover:-translate-y-2 hover:border-primary/55 hover:shadow-[0_12px_30px_rgba(30,64,175,0.2)] cursor-pointer"
+                className="group relative flex h-[120px] w-[200px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md transition-all duration-300 [will-change:opacity,transform] hover:-translate-y-2 hover:border-primary/40 hover:shadow-[0_12px_30px_rgba(30,64,175,0.15)] cursor-pointer"
               >
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/12 via-transparent to-black/20 opacity-70" />
-
                 {failedImages[`${brand.name}-${idx}`] ? null : (
                   <Image
                     src={brand.logo}
                     alt={`Logo de repuestos ${brand.name}`}
                     width={128}
                     height={64}
-                    className="relative z-10 mx-auto h-16 w-32 object-contain opacity-90 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
+                    className="relative z-10 mx-auto h-16 w-32 object-contain opacity-85 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
                     onError={() => {
                       setFailedImages((previous) => ({ ...previous, [`${brand.name}-${idx}`]: true }));
                     }}
                   />
                 )}
                 <span
-                  className={`absolute inset-0 z-10 flex items-center justify-center text-[15px] font-bold text-white/80 tracking-wider uppercase transition-opacity ${
+                  className={`absolute inset-0 z-10 flex items-center justify-center text-[15px] font-bold text-slate-700 tracking-wider uppercase transition-opacity ${
                     failedImages[`${brand.name}-${idx}`] ? "opacity-100" : "opacity-0"
                   }`}
                 >

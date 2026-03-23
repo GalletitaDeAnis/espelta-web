@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock3, Mail, MapPin, Phone, Facebook } from "lucide-react";
+import { Clock3, Mail, MapPin, Phone } from "lucide-react";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
 const navPills = [
-  "Inicio",
-  "Sobre nosotros",
-  "Productos",
-  "Repuestos a Pedido",
-  "Cliente Espelta",
-  "Contacto",
+  { label: "Inicio", href: "/" },
+  { label: "Sobre nosotros", href: "/sobre-nosotros" },
+  { label: "Productos", href: "/productos" },
+  { label: "Repuestos a Pedido", href: "#" },
+  { label: "Cliente Espelta", href: "#" },
+  { label: "Contacto", href: "/contacto" },
 ];
 
 export function SiteFooterSection() {
@@ -32,13 +33,26 @@ export function SiteFooterSection() {
             para asegurar el rendimiento óptimo de tu vehículo.
           </p>
 
-          <a
-            href="#"
-            className="mt-8 flex w-fit items-center gap-2.5 rounded-full border-2 border-primary px-6 py-2.5 text-[14px] font-bold text-primary transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] active:scale-95"
-          >
-            <Facebook size={18} />
-            Síguenos en Facebook
-          </a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="https://www.facebook.com/profile.php?id=61588335440872"
+              target="_blank"
+              rel="noreferrer"
+              className="flex w-fit items-center gap-2.5 rounded-full border-2 border-primary px-6 py-2.5 text-[14px] font-bold text-primary transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] active:scale-95"
+            >
+              <FaFacebookF size={18} />
+              Facebook
+            </a>
+            <a
+              href="https://www.instagram.com/espeltaimportadora/"
+              target="_blank"
+              rel="noreferrer"
+              className="flex w-fit items-center gap-2.5 rounded-full border-2 border-white/40 px-6 py-2.5 text-[14px] font-bold text-white/90 transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] active:scale-95"
+            >
+              <FaInstagram size={18} />
+              Instagram
+            </a>
+          </div>
         </div>
 
         <div className="rounded-2xl bg-white p-8 text-slate-700 border border-slate-200 shadow-md relative overflow-hidden group">
@@ -48,21 +62,28 @@ export function SiteFooterSection() {
             Contacto Directo
           </h3>
           <div className="space-y-5 text-[14px] font-medium leading-relaxed text-slate-600">
-            <a href="mailto:contacto@espelta.com" className="flex items-start gap-4 transition-colors hover:text-slate-900">
+            <a href="mailto:Imporpec23@Gmail.com" className="flex items-start gap-4 transition-colors hover:text-slate-900">
               <Mail size={20} className="mt-0.5 text-primary shrink-0" />
-              contacto@espelta.com
-            </a>
-            <a href="https://wa.me/59170706280" target="_blank" rel="noreferrer" className="flex items-start gap-4 transition-colors hover:text-slate-900">
-              <Phone size={20} className="mt-0.5 text-primary shrink-0" />
-              (+591) 70706280
+              Imporpec23@Gmail.com
             </a>
             <div className="flex items-start gap-4">
+              <Phone size={20} className="mt-0.5 text-primary shrink-0" />
+              <span>
+                <a href="https://wa.me/59170706280" target="_blank" rel="noreferrer" className="hover:text-slate-900">(+591) 70706280</a>
+                {" · "}
+                <a href="https://wa.me/59179386505" target="_blank" rel="noreferrer" className="hover:text-slate-900">79386505</a>
+              </span>
+            </div>
+            <div className="flex items-start gap-4">
               <MapPin size={20} className="mt-0.5 text-primary shrink-0" />
-              <span>Av. América Oeste Nro 123<br/>Zona Cala Cala, Cochabamba</span>
+              <span>
+                <strong className="text-slate-800">Centro:</strong> Gral. Acha #452 entre Tumusla y Tarapaca<br/>
+                <strong className="text-slate-800">Norte:</strong> Av. Simon Lopez #854 entre Calampampa y Mercedes Anaya
+              </span>
             </div>
             <div className="flex items-start gap-4">
               <Clock3 size={20} className="mt-0.5 text-primary shrink-0" />
-              <span>Lun - Vie: 08:30 a 18:30<br/>Sábados: 09:00 a 13:00</span>
+              <span>Lun - Sáb: 8:30-12:30 y 14:00-18:00</span>
             </div>
           </div>
         </div>
@@ -73,13 +94,13 @@ export function SiteFooterSection() {
           </h3>
           <div className="flex flex-wrap gap-3 max-w-[320px] justify-center md:justify-start">
             {navPills.map((item) => (
-              <a
-                key={item}
-                href="#"
+              <Link
+                key={item.label}
+                href={item.href}
                 className="rounded-full bg-white/10 border border-white/25 px-4 py-2 text-[13px] font-semibold text-white/85 transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(30,64,175,0.2)] whitespace-nowrap"
               >
-                {item}
-              </a>
+                {item.label}
+              </Link>
             ))}
           </div>
         </div>

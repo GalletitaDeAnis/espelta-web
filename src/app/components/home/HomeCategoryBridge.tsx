@@ -1,9 +1,9 @@
-import { Car, Home, Settings } from "lucide-react";
+import { Car, Package, Settings } from "lucide-react";
 
 const quickCards = [
-  { label: "VEHÍCULOS", icon: Car },
-  { label: "REPUESTOS", icon: Settings },
-  { label: "INMUEBLES", icon: Home },
+  { label: "Externos", icon: Car },
+  { label: "Internos", icon: Settings },
+  { label: "Otros", icon: Package },
 ];
 
 export function HomeCategoryBridge() {
@@ -29,7 +29,7 @@ export function HomeCategoryBridge() {
                   className="mb-4 text-slate-700 transition-all duration-300 group-hover:scale-110 group-hover:text-primary" 
                 />
 
-                <span className="text-[14px] font-bold tracking-[0.15em] uppercase text-slate-700 transition-colors duration-300 group-hover:text-slate-900 sm:text-[15px]">
+                <span className="text-center text-[14px] font-bold tracking-[0.15em] uppercase text-slate-700 transition-colors duration-300 group-hover:text-slate-900 sm:text-[15px]">
                   {card.label}
                 </span>
 

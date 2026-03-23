@@ -30,7 +30,7 @@ const benefits = [
 export function AboutWhyChooseUsSection() {
   return (
     <section className="bg-white px-4 py-16 sm:px-6">
-      <div className="mx-auto w-full max-w-[1400px]">
+      <div className="mx-auto w-full max-w-[1200px]">
         <div className="mb-10 max-w-2xl">
           <h2 className="text-[28px] font-black uppercase tracking-tight text-slate-900 sm:text-[36px]">
             POR QUÉ ELEGIRNOS

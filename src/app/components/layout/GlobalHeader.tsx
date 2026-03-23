@@ -10,7 +10,7 @@ import type { IconType } from "react-icons";
 const menuItems = [
   { label: "INICIO", icon: FaHome, href: "/" },
   { label: "SOBRE NOSOTROS", icon: FaUsers, href: "/sobre-nosotros" },
-  { label: "PRODUCTOS", icon: FaCarSide, href: "#" },
+  { label: "PRODUCTOS", icon: FaCarSide, href: "/productos" },
   { label: "CLIENTE ESPELTA", icon: FaUserCircle, href: "#" },
 ];
 
@@ -94,12 +94,12 @@ export function GlobalHeader() {
             </div>
           </div>
 
-          <a
-            href="#"
+          <Link
+            href="/contacto"
             className="hidden h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-[6px] bg-primary px-4 text-[13px] font-bold text-white shadow-[0_4px_12px_rgba(30,64,175,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-strong hover:shadow-[0_6px_16px_rgba(30,64,175,0.4)] active:translate-y-0 active:scale-95 md:flex lg:h-[46px] lg:px-5 lg:text-[14px]"
           >
             Contactar
-          </a>
+          </Link>
         </div>
       </div>
     </header>
